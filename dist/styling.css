@@ -1,0 +1,12 @@
+body {
+  min-width: 1000px; /* your desired width */
+  max-width: 100%;
+  min-height: 1000px;
+  position: relative;
+  vertical-align:middle;
+}
+
+h1{
+  margin-left: 30%;
+  margin-top: 10%
+}

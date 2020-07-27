@@ -26,6 +26,8 @@ function appendData(inputValue) {
     });
 }
 
+// window.open('popup.html', "newWin", "width="+screen.availWidth+",height="+screen.availHeight)
+
 // Initialize script on load
 document.addEventListener('DOMContentLoaded', initScript);
 
