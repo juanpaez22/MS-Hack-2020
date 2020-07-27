@@ -10,3 +10,10 @@ h1{
   margin-left: 30%;
   margin-top: 10%
 }
+
+#chart {
+  display: none;
+  margin-top: 15px;
+  width:700px;
+  height: 200px;
+}
