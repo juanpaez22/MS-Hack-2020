@@ -27,7 +27,6 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
-dist/
 node_modules/
 .tmp
 GumGumScreenshots_*.crx

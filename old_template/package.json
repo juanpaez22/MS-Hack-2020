@@ -36,6 +36,7 @@
     "verbose": true
   },
   "dependencies": {
+    "jquery": "^3.5.1",
     "nodemon": "^1.14.12"
   },
   "resolutions": {
