@@ -1,30 +1,55 @@
 <!doctype html>
 <html>
 <link rel="stylesheet" type="text/css" href="styling.css">
+
+<head>
+  <title>Chrome-Extension</title>
+  <script src="jquery-3.5.1.min.js"></script>
+  <script src="alarm_utils.js"></script>
+  <script src="storage_utils.js"></script>
+  <script src="popup.js"></script>
+</head>
+
+<body>
+  <h1>Enlighten </h1>
+  <h2>Test output: <span id="num">0</span></h2>
+  <div>
+    <input type="button" id="test_button" value="1">
+    <input type="button" value="2">
+    <input type="button" value="3">
+    <input type="button" value="4">
+    <input type="button" value="5">
+    <input type="button" value="6">
+    <input type="button" value="7">
+    <input type="button" value="8">
+    <input type="button" value="9">
+    <input type="button" value="10">
+  </div>
+  <!--input onclick="location.href='main_view.html';" type="button" id="test_button" value="Check-in"-->
+  <div class="footer">
+    <div id="tabs" class="tabs">
+            <nav>
+              <ul>
+                <li><a href="#section-1" class="icon-shop"><img class="iconImage" src="home-icon.png"></a></li>
+                <li><a href="#section-2" class="icon-cup"><img class="iconImage" src="data-icon.png"></a></li>
+                <li><a href="#section-3" class="icon-food"><img class="iconImage" src="resources-icon.png"></a></li>
+              </ul>
+            </nav>
+          </div>
+  </div>
+</body>
     <head>
         <title>Chrome-Extension</title>
         <script src="jquery-3.5.1.min.js"></script>
-        <script src="storage_utils.js"></script>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script type="module" src="storage_utils.js"></script>
+        <script src="alarm_utils.js"></script>
         <script src="popup.js"></script>
+        <script type="module" src="data-viz.js"></script>
     </head>
     <body>
     </body>
-    <body>
-        <h1>How are you feeling?</h1>
-        <h2>Test output: <span id="num">0</span></h2>
-        <div>
-          <input type="button"  id="rank1" value="1">
-        <input type="button" id value="2">
-          <input type="button" value="3">
-            <input type="button" value="4">
-              <input type="button" value="5">
-                <input type="button" value="6">
-                  <input type="button" value="7">
-                    <input type="button" value="8">
-                      <input type="button" value="9">
-                        <input type="button"value="10">
-  </div>
-        <!-- <input onclick="location.href='main_view.html';" type="button" id="test_button" value="Check-in"> -->
-    </body>
+    <button id="chart-button">Show Data</button>
+    <div id="chart"></div>
 
 </html>
