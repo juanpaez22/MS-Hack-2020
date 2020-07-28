@@ -19,7 +19,7 @@ chrome.runtime.onStartup.addListener(function () {
 
 // Runs when the notification is clicked.
 chrome.notifications.onClicked.addListener(function () {
-  // Currently unused.
+  chrome.windows.create({url: "popup.html", width: 450, height: 600, type: "popup"})
 });
 
 function bootstrapFakeData() {
