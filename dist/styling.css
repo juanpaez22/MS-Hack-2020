@@ -4,9 +4,16 @@ body {
   min-height: 1000px;
   position: relative;
   vertical-align:middle;
+  background-color: black;
+  color: white;
 }
 
 h1{
   margin-left: 30%;
   margin-top: 10%
+}
+
+input {
+  margin: 10px;
+  padding: 10px;
 }
