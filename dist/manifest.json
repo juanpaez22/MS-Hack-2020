@@ -13,7 +13,8 @@
         "128": "128x128.png"
     },
     "browser_action": {
-        "default_title": "Popup"
+        "default_title": "Popup",
+        "default_popup": "popup.html"
     },
     "content_security_policy":
         "script-src 'self' 'unsafe-eval'; object-src 'self'; img-src * data: 'self' 'unsafe-eval'",

@@ -5,8 +5,4 @@ const options = {
     message: "Hello from background.js!"
   };
   
-chrome.browserAction.onClicked.addListener(function (){
-    chrome.notifications.create(options);
-});
-
-//,"default_popup": "popup.html"
+chrome.notifications.create(options);
