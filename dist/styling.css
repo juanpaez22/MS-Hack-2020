@@ -4,7 +4,7 @@ body {
   min-height: 600px;
   position: relative;
   vertical-align:middle;
-  background-color: rgb(253, 215, 158);
+  background-color:sandybrown;
   color: white;
 }
 
@@ -16,7 +16,7 @@ h1{
 #chart {
   display: none;
   margin-top: 15px;
-  width:700px;
+  width: 400px;
   height: 200px;
 }
 input {
