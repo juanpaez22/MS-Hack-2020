@@ -1,5 +1,3 @@
-import {getMoodData,appendMoodData} from "./storage_utils.js"
-
 function createGraph(data){
     console.log("creating graph", data)
     // set the dimensions and margins of the graph
@@ -116,7 +114,7 @@ function filterLast7Days(data){
         }
     })
     
-    return filtered_list.slice(10,20) //jsu bc i have bad data in storage
+    return filtered_list
 }
 
 function getRandomInt(max) {

@@ -3,7 +3,7 @@
 
 const notification_options = {
     type: "basic",
-    iconUrl: "logo.jpg",
+    iconUrl: "logo(128x128).png",
     title: "Time for your daily check-in!",
     message: "Tell us how you feel today in the Enlighten extension."
 };
