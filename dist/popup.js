@@ -9,34 +9,33 @@ const initScript = () => {
     // TODO: Any initializations-- load initial quote, etc.
 };
 
-/**
- * Appends a mood rating value with timestamp to data object.
- * @param {} inputValue the user's mood input.
- */
-function appendData(inputValue) {
-    chrome.storage.sync.get({data: []}, function (result) {
-        var data = result.data;
-        data.push({val: inputValue, timestamp: Date()});
-        chrome.storage.sync.set({data: data}, function () {
-            chrome.storage.sync.get('data', function (result) {
-                console.log("New data:")
-                console.log(result.data)
-            });
-        });
-    });
-}
-
-// window.open('popup.html', "newWin", "width="+screen.availWidth+",height="+screen.availHeight)
-
 // Initialize script on load
 document.addEventListener('DOMContentLoaded', initScript);
 
 // JQuery listener
 $(function(){
 
-    // Demo query showing how storage works when a button is clicked
+    // Demo query showing how storage works when a button is clicked.
+    // Gets previous result, and sets new result in the callback.
     $('#test_button').click(function(){
-        appendData(5);
+
+        getConfigNotificationFrequency(function (freq) {
+            if (freq == undefined) {
+                freq = 0;
+            }
+            console.log("Previous frequency: ", freq)
+            setConfigNotificationFrequency(freq + 1)
+        });
+
+
+        getMoodData(function (data) {
+            var new_num = 0;
+            if (data != undefined) {
+                new_num = data[data.length - 1].val + 1;
+            }
+            console.log("Previous final data element: ", new_num);
+            appendMoodData(new_num);
+        });
     });
 
     // TODO: add listener for real buttons
