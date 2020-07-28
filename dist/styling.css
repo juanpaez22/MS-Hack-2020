@@ -1,16 +1,18 @@
 body {
   min-width: 360px;
   max-width: 100%;
-  min-height: 600px;
+  min-height: 575px;
   position: relative;
   vertical-align:middle;
-  background-color:#5DC3EE;
   color: white;
+  background-image: url(Background.jpg);
+  background-size: cover;
 }
 
 h1{
-  margin-left: 30%;
-  margin-top: 10%
+  padding-left: 35%;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 #chart {
@@ -38,14 +40,12 @@ input {
 }
 
 .link{
-  width: calc(100% / 3);
-  height: 60px;
+  width: 120px;
+  height: 120px;
   display: inline-flex;
-  font-size: 26px;
   box-sizing: border-box;
   font-weight: 500;
   vertical-align: top;
-  justify-content: center;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -61,5 +61,60 @@ input {
 }
 
 .iconImage{
-  height: 48px;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon/icomoon.eot?pvm5gj');
+	src:url('../fonts/icomoon/icomoon.eot?#iefixpvm5gj') format('embedded-opentype'),
+		url('../fonts/icomoon/icomoon.woff?pvm5gj') format('woff'),
+		url('../fonts/icomoon/icomoon.ttf?pvm5gj') format('truetype'),
+		url('../fonts/icomoon/icomoon.svg?pvm5gj#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+} /* Icons created with icomoon.io/app */
+
+.tabs {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	margin: 1em 0 2em;
+}
+
+/* Nav */
+.tabs nav {
+	text-align: center;
+}
+
+.tabs nav ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: inline-block;
+}
+
+.tabs nav ul li {
+	border: 1px solid #becbd2;
+	border-bottom: none;
+	margin: 0 0.25em;
+	display: block;
+	float: left;
+	position: relative;
+}
+
+.tabs nav a {
+	color: #becbd2;
+	display: block;
+	font-size: 1.45em;
+	line-height: 2.5;
+	padding: 0 1.25em;
+	white-space: nowrap;
+}
+
+/* Icons */
+.tab1 {
+  background-image: url(home-icon.png);
 }
