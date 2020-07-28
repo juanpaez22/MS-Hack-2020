@@ -1,6 +1,6 @@
 const options = {
     type: "basic",
-    iconUrl: "test.jpg",
+    iconUrl: "logo.jpg",
     title: "background.js",
     message: "Hello from background.js!"
   };
