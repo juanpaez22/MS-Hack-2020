@@ -1,19 +1,19 @@
 {
     "manifest_version": 2,
-    "name": "chrome-extension-template",
+    "name": "Enlighten: Mental Health Extension",
     "version": "1.0",
     "background": {
-        "scripts": ["background.js"],
+        "scripts": ["background.js", "alarm_utils.js", "storage_utils.js"],
         "persistent": false
     },
-    "description": "Chrome extension boilerplate, replace all values!",
+    "description": "Mental health extension.",
     "icons": {
         "16": "logo(16x16).png",
         "48": "logo(48x48).png",
         "128": "logo(128x128).png"
     },
     "browser_action": {
-        "default_title": "Popup",
+        "default_title": "Enlighten",
         "default_popup": "popup.html"
     },
     "content_security_policy":
@@ -21,6 +21,7 @@
     "offline_enabled": true,
     "permissions": [
         "storage",
-        "notifications"
+        "notifications",
+        "alarms"
     ]
 }

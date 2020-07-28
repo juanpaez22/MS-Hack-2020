@@ -4,6 +4,7 @@
 /**
  * Appends a mood rating value with timestamp to data object.
  * Each object in the data array as a val param and a timestamp param.
+ * Also updates alarm to go off 24 hours from the last timestamp.
  * @param {} inputValue the user's mood input.
  */
 function appendMoodData(inputValue) {
@@ -14,6 +15,7 @@ function appendMoodData(inputValue) {
             chrome.storage.sync.get('data', function (result) {
                 console.log("New data:")
                 console.log(result.data)
+                updateAlarm();
             });
         });
     });
@@ -26,26 +28,11 @@ function appendMoodData(inputValue) {
  */
 function getMoodData(callback) {
     var data = chrome.storage.sync.get('data', function (result) {
-        callback(result.data);
-    });
-}
-
-/**
- * Change frequency configuration.
- * @param {} frequency the new frequency.
- */
-function setConfigNotificationFrequency(inputValue) {
-    chrome.storage.sync.set({notification_frequency: inputValue}, function () {
-        console.log("Changed frequency: " + inputValue);
-    });
-}
-
-/**
- * Gets the current frequency value and executes a callback with it.
- * @param {} callback the callback function.
- */
-function getConfigNotificationFrequency(callback) {
-    chrome.storage.sync.get(['notification_frequency'], function (result) {
-        callback(result.notification_frequency);
+        if (result != undefined) {
+            callback(result.data);
+        }
+        else {
+            callback(undefined);
+        }
     });
 }

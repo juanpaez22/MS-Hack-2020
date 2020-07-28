@@ -19,15 +19,6 @@ $(function(){
     // Gets previous result, and sets new result in the callback.
     $('#test_button').click(function(){
 
-        getConfigNotificationFrequency(function (freq) {
-            if (freq == undefined) {
-                freq = 0;
-            }
-            console.log("Previous frequency: ", freq)
-            setConfigNotificationFrequency(freq + 1)
-        });
-
-
         getMoodData(function (data) {
             var new_num = 0;
             if (data != undefined) {
