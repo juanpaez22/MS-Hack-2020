@@ -1,21 +1,30 @@
-import {getMoodData} from "./storage_utils.js"
+import {getMoodData,appendMoodData} from "./storage_utils.js"
 
 function createGraph(entries){
     console.log("creating graph", entries)
     // set the dimensions and margins of the graph
 
     // create svg element:
-    var svg = d3.select("#chart").append("svg").attr("width", 800).attr("height", 200)
+    var svg = d3.select("#chart").append("svg").attr("width", 340).attr("height", 300)
 
     // Create the scale
     var x = d3.scalePoint()
     .domain(["Sunday", "Monday","Tuesday", "Wednesday", "Thursday", "Friday","Saturday"])         // This is what is written on the Axis: from 0 to 100
-    .range([100, 600]);       // This is where the axis is placed: from 100 px to 800px
+    .range([10, 340]);       // This is where the axis is placed: from 100 px to 800px
 
     svg
     .append("g")
-    .attr("transform", "translate(0,150)")      // This controls the vertical position of the Axis
+    .attr("transform", "translate(0,205)")      // This controls the vertical position of the Axis
     .call(d3.axisBottom(x));
+
+    var y = d3.scalePoint()
+    .domain(["Amazing", "Great","Not The Best"])         // This is what is written on the Axis: from 0 to 100
+    .range([190, 10]);       // This is where the axis is placed: from 100 px to 800px
+
+    svg
+    .append("g")
+    .attr("transform", "translate(300,0)")      // This controls the vertical position of the Axis
+    .call(d3.axisRight(y));
 
     // prepare a helper function
     var lineFunc = d3.line()
@@ -31,7 +40,8 @@ function createGraph(entries){
     document.getElementById("chart").style.display = "block"
     
 }
-function scaleDownRange(min,max,a,b,x){
+
+function scaleRange(min,max,a,b,x){
     let a_b_diff  = b-a;
     let max_min_diff = max-min;
 
@@ -39,34 +49,30 @@ function scaleDownRange(min,max,a,b,x){
     return result
 }
 
+function getXAxis(first,last){
+
+    let first_d = new Date(first.timestamp)
+    let last_d = new Date(last.timestamp)
+
+
+
+
+}
 function convertEntries(entries){
-    const month_map = { 
-        0: "Jan",
-        1: "Feb",
-        2: "Mar",
-        3: "Apr",
-        4: "May",
-        5: "June",
-        6: "July",
-        7: "Aug",
-        8: "Sept",
-        9: "Oct",
-        10: "Nov",
-        11: "Dec",
-    }
     let converted_entries = new Array();
 
     console.log(entries)
     let min = Date.parse(entries[0].timestamp)
     let max = Date.parse(entries[entries.length - 1].timestamp)
 
-    let a = 100;
-    let b = 600;
+    let a = 10;
+    let b = 340;
 
     entries.forEach((entry) => {
 
-        let x = scaleDownRange(min,max,a,b,Date.parse(entry.timestamp))
-        converted_entries.push({x: x, y:entry.val})
+        let x = scaleRange(min,max,a,b,Date.parse(entry.timestamp)) + 10
+        let y = scaleRange(0,10,0,200,(10-entry.val))
+        converted_entries.push({x: x, y:y})
     });
     
     return converted_entries
@@ -85,8 +91,13 @@ function filterLast7Days(data){
         }
     })
     
-    return filtered_list
+    return filtered_list.slice(10,20) //jsu bc i have bad data in storage
 }
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
 
 function analyzeData(data){
 

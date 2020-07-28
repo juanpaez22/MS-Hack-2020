@@ -37,4 +37,4 @@ function getMoodData(callback) {
     });
 }
 
-export {getMoodData}
+export {getMoodData,appendMoodData}
