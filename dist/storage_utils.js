@@ -36,5 +36,3 @@ function getMoodData(callback) {
         }
     });
 }
-
-export {getMoodData,appendMoodData}
