@@ -1,32 +1,8 @@
+import {getMoodData} from "./storage_utils.js"
 
-function newPlot(){
-    data = [4, 8, 15, 16, 23, 42];
-    const div = d3.create("div")
-      .style("font", "10px sans-serif")
-      .style("text-align", "right")
-      .style("color", "white");
-
-    div.selectAll("div")
-    .data(data)
-    .join("div")
-    .style("background", "steelblue")
-    .style("padding", "3px")
-    .style("margin", "1px")
-    .style("width", d => `${d * 10}px`)
-    .text(d => d);
-  
-    return div.node();
-} 
-
-
-
-$(document).ready(()=>{
-
-    $("#chart-button").on("click",()=>{
-        document.getElementById("chart").style.display = "block"
-    })
+function createGraph(entries){
+    console.log("creating graph", entries)
     // set the dimensions and margins of the graph
-    var data = [{x: 100, y: 20}, {x: 200, y: 150}, {x: 300, y: 100}, {x: 400, y: 20}, {x: 500, y: 130}, {x: 600, y: 20}]
 
     // create svg element:
     var svg = d3.select("#chart").append("svg").attr("width", 800).attr("height", 200)
@@ -48,7 +24,83 @@ $(document).ready(()=>{
 
     // Add the path using this helper function
     svg.append('path')
-    .attr('d', lineFunc(data))
+    .attr('d', lineFunc(entries))
     .attr('stroke', 'black')
     .attr('fill', 'none');
+
+    document.getElementById("chart").style.display = "block"
+    
+}
+function scaleDownRange(min,max,a,b,x){
+    let a_b_diff  = b-a;
+    let max_min_diff = max-min;
+
+    let result = ((a_b_diff)*(x-min))/(max_min_diff)
+    return result
+}
+
+function convertEntries(entries){
+    const month_map = { 
+        0: "Jan",
+        1: "Feb",
+        2: "Mar",
+        3: "Apr",
+        4: "May",
+        5: "June",
+        6: "July",
+        7: "Aug",
+        8: "Sept",
+        9: "Oct",
+        10: "Nov",
+        11: "Dec",
+    }
+    let converted_entries = new Array();
+
+    console.log(entries)
+    let min = Date.parse(entries[0].timestamp)
+    let max = Date.parse(entries[entries.length - 1].timestamp)
+
+    let a = 100;
+    let b = 600;
+
+    entries.forEach((entry) => {
+
+        let x = scaleDownRange(min,max,a,b,Date.parse(entry.timestamp))
+        converted_entries.push({x: x, y:entry.val})
+    });
+    
+    return converted_entries
+}
+
+
+function filterLast7Days(data){
+    var cur_date = new Date();
+    var seven_days_before = new Date(cur_date.getFullYear(), cur_date.getMonth(),cur_date.getDate() - 7);
+    console.log(cur_date)
+    console.log(seven_days_before)
+    let filtered_list = data.filter((entry) => {
+        let date = new Date(entry.timestamp)
+        if (date < cur_date && date > seven_days_before){
+            return entry
+        }
     })
+    
+    return filtered_list
+}
+
+function analyzeData(data){
+
+    let filtered_list = filterLast7Days(data)
+    let converted_entries = convertEntries(filtered_list)
+    createGraph(converted_entries)
+    document.getElementById("chart").style.display = "block"
+
+    console.log("filtered", filtered_list);
+    console.log("converted", converted_entries);
+}
+
+$(document).ready(()=>{
+    $("#chart-button").on("click",()=>{
+        getMoodData(analyzeData)
+    })
+})

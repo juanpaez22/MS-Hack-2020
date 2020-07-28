@@ -49,3 +49,5 @@ function getConfigNotificationFrequency(callback) {
         callback(result.notification_frequency);
     });
 }
+
+export {getMoodData}
