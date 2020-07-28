@@ -5,6 +5,7 @@
 chrome.runtime.onInstalled.addListener(function () {
   // Notify user initially, and reset alarm for one more hour.
   console.log("Running on install");
+  bootstrapFakeData();  // TODO: REMOVE THIS LINE BEFORE SUBMITTING
   chrome.notifications.create(notification_options);
   updateAlarm();
 });
@@ -20,3 +21,20 @@ chrome.runtime.onStartup.addListener(function () {
 chrome.notifications.onClicked.addListener(function () {
   // Currently unused.
 });
+
+function bootstrapFakeData() {
+  var data = [];
+  for (i = 6; i >= 1; i --) {
+    var cur_date = new Date();
+    var date = new Date(cur_date.getFullYear(), cur_date.getMonth(),cur_date.getDate() - i);
+    data.push({val: 7 - i, timestamp: date.toString()});
+  }
+
+  chrome.storage.sync.set({data: data}, function () {
+    chrome.storage.sync.get('data', function (result) {
+        console.log("New data:")
+        console.log(result.data)
+        updateAlarm();
+    });
+  });
+}
