@@ -3,19 +3,27 @@
 
 // Runs when the extension is initially installed.
 chrome.runtime.onInstalled.addListener(function () {
-  // Notify user initially, and reset alarm for one more hour.
-  console.log("Running on install");
-  bootstrapFakeData();  // TODO: REMOVE THIS LINE BEFORE SUBMITTING
+  // Notify user initially, and set default values.
+  console.log("Running on install script.");
+  // bootstrapFakeData();  // TODO: REMOVE THIS LINE BEFORE SUBMITTING
+
   setReminderPeriod(1); // set reminder period to 1 hour.
-  chrome.notifications.create(notification_options);
-  updateAlarm();
+  setNotificationTime(10, 30);  // Set default reminder time to 10:30 AM.
+  setEngagementStreak(0); // Clear engagement streak.
+  setWorkdayEnabled(false);  // Disable workday reminder.
+  setWorkdayEndTime(5, 0); // Set default end time to 5 PM.
+
+  chrome.notifications.create(reminder_notification_options); // Send initial notification.
+  updateReminderAlarm();
+  updateWorkdayEndAlarm();
 });
 
 // Runs every time the browser opens.
 chrome.runtime.onStartup.addListener(function () {
   // Reset alarm in case trigger was missed.
-  console.log("Running on startup.");
-  updateAlarm();
+  console.log("Running on startup script.");
+  updateReminderAlarm();
+  updateWorkdayEndAlarm();
 });
 
 // Runs when the notification is clicked.
@@ -35,7 +43,7 @@ function bootstrapFakeData() {
     chrome.storage.sync.get('data', function (result) {
         console.log("New data:")
         console.log(result.data)
-        updateAlarm();
+        updateReminderAlarm();
     });
   });
 }
