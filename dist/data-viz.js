@@ -8,7 +8,7 @@ function createGraph(data){
     // Create the scale
     var x = d3.scalePoint()
     .domain(data[1])         // This is what is written on the Axis: from 0 to 100
-    .range([25, 340]);       // This is where the axis is placed: from 100 px to 800px
+    .range([30, 340]);       // This is where the axis is placed: from 100 px to 800px
 
     svg
     .append("g")
@@ -16,7 +16,7 @@ function createGraph(data){
     .call(d3.axisBottom(x));
 
     var y = d3.scalePoint()
-    .domain(["OK", "Great","Amazing"])         // This is what is written on the Axis: from 0 to 100
+    .domain(["Bad", "Good","Amazing"])         // This is what is written on the Axis: from 0 to 100
     .range([190, 10]);       // This is where the axis is placed: from 100 px to 800px
 
     svg
@@ -32,9 +32,23 @@ function createGraph(data){
     // Add the path using this helper function
     svg.append('path')
     .attr('d', lineFunc(data[0]))
-    .attr('stroke', 'black')
+    .attr('stroke', '#787a72')
     .attr('fill', 'none');
 
+    // Add the scatterplot
+    svg.append('g')
+    .selectAll("dot")
+    .data(data[0])
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return d.x; } )
+      .attr("cy", function (d) { return d.y; } )
+      .attr("r", 3)
+      .style("fill", "black")
+      .append("title")
+        .text("innerHTML")
+
+    d3.selectAll("svg text")
     document.getElementById("chart").style.display = "block"
     
 }
@@ -78,7 +92,6 @@ function getXAxis(first,last){
         axis.push(month_map[last_d.getMonth()] + " " + last_d.getDate())
     }
     
-    console.log(axis)
     return axis
 }
 function convertEntries(entries){
@@ -123,8 +136,8 @@ function getRandomInt(max) {
 
 
 function analyzeData(data){
-
-    let filtered_list = filterLast7Days(data)
+    console.log(data)
+    let filtered_list = filterLast7Days(data.slice(10,data.length))//limiting to last 10 bc i hace bad data
     let converted_entries = convertEntries(filtered_list)
     createGraph(converted_entries)
     document.getElementById("chart").style.display = "block"
