@@ -3,7 +3,7 @@
     "name": "Enlighten: Mental Health Extension",
     "version": "1.0",
     "background": {
-        "scripts": ["storage_utils.js", "alarm_utils.js", "background.js"],
+        "scripts": ["storage_utils.js", "alarm_utils.js", "background.js", "popup.js"],
         "persistent": false
     },
     "description": "Mental health extension.",
