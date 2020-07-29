@@ -118,3 +118,13 @@ input {
 .tab1 {
   background-image: url(home-icon.png);
 }
+
+#HomeContent {
+  display: block;
+}
+#DataContent {
+  display: none;
+}
+#SettingContent {
+  display: none;
+}
