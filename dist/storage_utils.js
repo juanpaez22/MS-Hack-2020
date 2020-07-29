@@ -27,12 +27,27 @@ function appendMoodData(inputValue) {
  * @param {} callback the callback function.
  */
 function getMoodData(callback) {
-    var data = chrome.storage.sync.get('data', function (result) {
+    chrome.storage.sync.get('data', function (result) {
         if (result != undefined) {
             callback(result.data);
         }
         else {
             callback(undefined);
         }
+    });
+}
+
+function setReminderPeriod(numHours) {
+    if (numHours < 1) {
+        numHours = 1;
+    }
+    chrome.storage.sync.set({reminder_period: numHours}, function() {
+        console.log("Set reminder period for " + numHours);
+    });
+}
+
+function getReminderPeriod(callback) {
+    chrome.storage.sync.get("reminder_period", function (result) {
+        callback(result.reminder_period);
     });
 }

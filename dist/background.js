@@ -6,6 +6,7 @@ chrome.runtime.onInstalled.addListener(function () {
   // Notify user initially, and reset alarm for one more hour.
   console.log("Running on install");
   bootstrapFakeData();  // TODO: REMOVE THIS LINE BEFORE SUBMITTING
+  setReminderPeriod(1); // set reminder period to 1 hour.
   chrome.notifications.create(notification_options);
   updateAlarm();
 });

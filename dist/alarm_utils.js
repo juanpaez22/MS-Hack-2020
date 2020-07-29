@@ -15,18 +15,20 @@ const notification_options = {
 function updateAlarm() {
     chrome.alarms.clear("alarm");
     getMoodData(function (data) {
-        var nextTimeStamp = new Date();
-        nextTimeStamp.setHours(nextTimeStamp.getHours() + 1);
-        if (data != undefined) {
-            var lastInputTimestamp = new Date(data[data.length - 1].timestamp);
-            lastInputTimestamp.setHours(lastInputTimestamp.getHours() + 24);
-            if (lastInputTimestamp > nextTimeStamp) {
-                nextTimeStamp = lastInputTimestamp;
+        getReminderPeriod(function (period) {
+            var nextTimeStamp = new Date();
+            nextTimeStamp.setHours(nextTimeStamp.getHours() + period);
+            if (data != undefined) {
+                var lastInputTimestamp = new Date(data[data.length - 1].timestamp);
+                lastInputTimestamp.setHours(lastInputTimestamp.getHours() + 24);
+                if (lastInputTimestamp > nextTimeStamp) {
+                    nextTimeStamp = lastInputTimestamp;
+                }
             }
-        }
 
-        chrome.alarms.create("alarm", {when: nextTimeStamp.getTime()});
-        console.log("Setting next reminder for " + nextTimeStamp);
+            chrome.alarms.create("alarm", {when: nextTimeStamp.getTime()});
+            console.log("Setting next reminder for " + nextTimeStamp);
+        });
     });
 }
 
