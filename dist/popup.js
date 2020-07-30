@@ -6,9 +6,27 @@
  */
 const initScript = () => {
     console.log("Initialized popup script");
+
+    // Get tabs and open home tab by default.
     initTabs();
     openHomeContent();
-    // TODO: Any initializations-- load initial quote, etc.
+
+    // Check if user has already clicked today, and hide buttons if so.
+    hasUserClickedToday(function(hasClicked) {
+        if(hasClicked) {
+            hideMoodCheck();
+        }
+        else {
+            showMoodCheck();
+        }
+    });
+
+    // Check if user forgot to click yesterday, and reset streak if so.
+    hasUserClickedYesterday(function(hasClicked) {
+        if (!hasClicked) {
+            setEngagementStreak(0); // :(
+        }
+    })
 };
 
 // Initialize script on load
@@ -61,35 +79,99 @@ function hasUserClickedYesterday(callback) {
     });
 }
 
-function showAllButtons() {
-    var x = document.getElementById("temp");
+/**
+ * Shows div for mood check.
+ */
+function showMoodCheck() {
+    var x = document.getElementById("mood-check");
     x.style.display = "block";
+    var y = document.getElementById("post-mood-check");
+    y.style.display = "none";
 }
 
-function hideAllButtons() {
-    var x = document.getElementById("temp");
+/**
+ * Hides div for mood check.
+ */
+function hideMoodCheck() {
+    var x = document.getElementById("mood-check");
     x.style.display = "none";
+    var y = document.getElementById("post-mood-check");
+    y.style.display = "block";
 }
 
+/**
+ * Recalculates engagement streak. Should only get called when button is pressed.
+ */
+function recalculateStreak() {
+    hasUserClickedYesterday(function(hasClicked) {
+        if(hasClicked) {
+            getEngagementStreak(function(streak) {
+                setEngagementStreak(streak + 1);
+            });
+        }
+        else {
+            setEngagementStreak(0);
+        }
+    });
+}
+
+function refreshEngagementStreak() {
+    // TODO: Update engagement streak in HTML.
+}
+
+/**JQuery button click listeners. */
 $(function(){
     $("#-2").click(function(){
         appendMoodData(-2);
-        hideAllButtons();
+        hideMoodCheck();
+        recalculateStreak();
     });
     $("#-1").click(function(){
         appendMoodData(-1);
-        hideAllButtons();
+        hideMoodCheck();
+        recalculateStreak();
     });
     $("#0").click(function(){
         appendMoodData(0);
-        hideAllButtons();
+        hideMoodCheck();
+        recalculateStreak();
     });
     $("#1").click(function(){
         appendMoodData(1);
-        hideAllButtons();
+        hideMoodCheck();
+        recalculateStreak();
     });
     $("#2").click(function(){
         appendMoodData(2);
-        hideAllButtons();
+        hideMoodCheck();
+        recalculateStreak();
+    });
+    $("#apply-settings").click(function(){
+        var enableReminder = $('#reminder').prop("checked");
+        var reminderTime = $('#reminderTime').val();
+        var enableWorkdayEnd = $('#dayEnd').prop("checked");
+        var dayEndTime = $('#StopWork').val();
+
+        console.log("Reminder time: " + reminderTime);
+        console.log("Workday end time: " + dayEndTime);
+        console.log()
+
+        setWorkdayEnabled(enableWorkdayEnd);
+        setRemindersEnabled(enableReminder);
+
+        if (reminderTime != undefined && reminderTime != "") {
+            reminderHours = Number(reminderTime.split(':')[0]);
+            reminderMinutes = Number(reminderTime.split(':')[1]);
+            setReminderTime(reminderHours, reminderMinutes);
+        }
+
+        if (dayEndTime != undefined && dayEndTime != "") {
+            dayEndHours = Number(dayEndTime.split(':')[0]);
+            dayEndMinutes = Number(dayEndTime.split(':')[1]);
+            setWorkdayEndTime(dayEndHours, dayEndMinutes);
+        }
+
+        updateWorkdayEndAlarm();
+        updateReminderAlarm();
     });
 });

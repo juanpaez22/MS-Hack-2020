@@ -51,6 +51,7 @@ function updateReminderAlarm() {
                         }
                     }
         
+                    chrome.alarms.clear("notification");
                     chrome.alarms.create("notification", {when: nextNotificationTime.getTime()});
                     console.log("Setting next notification for " + nextNotificationTime);
                 });
@@ -77,6 +78,7 @@ function updateWorkdayEndAlarm() {
                 alarmTime.setMinutes(minute);
                 alarmTime.setSeconds(0);
                 alarmTime.setMilliseconds(0);
+                chrome.alarms.clear("workday_end");
                 chrome.alarms.create("workday_end", {when: alarmTime.getTime()});
                 console.log("Setting workday end alarm for " + alarmTime);
             });
@@ -87,12 +89,14 @@ function updateWorkdayEndAlarm() {
 // Runs when an alarm fires.
 chrome.alarms.onAlarm.addListener(function(alarm) {
     // Notify user, and reset alarm for one more hour.
-    console.log("Alarm firing!");
+    console.log("Alarm firing! " + alarm.name);
     if (alarm.name == "notification") {
+        chrome.alarms.clear("notification");
         chrome.notifications.create(reminder_notification_options);
         updateReminderAlarm();
     }
     else if (alarm.name == "workday_end") {
+        chrome.alarms.clear("workday_end");
         chrome.notifications.create(workday_notification_options);
         updateWorkdayEndAlarm();
     }
