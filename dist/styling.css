@@ -35,13 +35,11 @@ input {
   position: absolute;
   border-top: 1px solid #eeeeee;
   background-color: #5DC3EE;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
 }
 
 .iconImage{
-  width: 25px;
-  height: 25px;
+  width: 22px;
+  height: 22px;
   padding: 0;
 }
 
@@ -92,17 +90,14 @@ input {
 	white-space: nowrap;
 }
 
-/* Icons */
-.tab1 {
-  background-image: url(home-icon.png);
-}
 
 #HomeContent {
   display: block;
 }
 #DataContent {
-  display: none;
+  display: block;
 }
 #SettingContent {
-  display: none;
+  display: block;
+  color: black;
 }
