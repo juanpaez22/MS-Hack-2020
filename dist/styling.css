@@ -1,18 +1,23 @@
 body {
-  min-width: 360px;
-  max-width: 100%;
-  min-height: 575px;
-  position: relative;
-  vertical-align:middle;
-  color: white;
-  background-image: url(Background.png);
-  background-size: cover;
+	min-width: 360px;
+	max-width: 100%;
+	min-height: 575px;
+	position: relative;
+	vertical-align: middle;
+	color: #2E5E7D;
+	background-image: url(Background.png);
+	background-size: cover;
+	text-align: center;
 }
 
-h1{
-  padding-top: 5%;
-  padding-bottom: 5%;
-  color: #5DC3EE;
+#slogan {
+	font-style:italic;
+}
+
+h1 {
+	padding-top: 5%;
+	padding-bottom: 5%;
+	color: #2E5E7D;
 }
 
 #chart {
@@ -95,18 +100,18 @@ input {
   display: block;
 }
 #DataContent {
-  margin-top: 120px;
-  display: block;
+	display: none;
+	margin-top: 120px;
 }
-
+#SettingContent {
+	display: none;
+	color: black;
+}
 #data-avg{
   display: none;
   margin-top: 170px;
 }
-#SettingContent {
-  display: block;
-  color: black;
-}
+
 
 .btn-group button {
   height: 20px;
