@@ -140,3 +140,11 @@ input {
   clear: both;
   display: table;
 }
+
+.tr{
+  width: 100%;
+}
+
+.tc {
+  width: 33.33%;
+}
