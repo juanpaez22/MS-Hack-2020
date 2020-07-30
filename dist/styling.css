@@ -11,12 +11,13 @@ body {
 }
 
 #slogan {
-	font-style:italic;
+	font-style: italic;
 }
 
 #quote {
 	font-style: italic;
 }
+
 h1 {
 	padding-top: 5%;
 	padding-bottom: 5%;
@@ -24,43 +25,33 @@ h1 {
 }
 
 #chart {
-  display: none;
-  margin-top: 15px;
-  width: 400px;
-  height: 200px;
+	display: none;
+	margin-top: 15px;
+	width: 400px;
+	height: 200px;
 }
+
 input {
-  margin: 10px;
-  padding: 10px;
+	margin: 10px;
+	padding: 10px;
 }
 
-.footer{
-  width: 100%;
-  bottom: 0px;
-  height: 59px;
-  display: block;
-  overflow: hidden;
-  position: absolute;
-  border-top: 1px solid #eeeeee;
-  background-color: #5DC3EE;
+.footer {
+	width: 100%;
+	bottom: 0px;
+	height: 59px;
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	border-top: 1px solid #eeeeee;
+	background-color: #5DC3EE;
 }
 
-.iconImage{
-  width: 22px;
-  height: 22px;
-  padding: 0;
+.iconImage {
+	width: 22px;
+	height: 22px;
+	padding: 0;
 }
-
-@font-face {
-	font-family: 'icomoon';
-	src:url('../fonts/icomoon/icomoon.eot?pvm5gj');
-	src:url('../fonts/icomoon/icomoon.eot?#iefixpvm5gj') format('embedded-opentype'),
-		url('../fonts/icomoon/icomoon.woff?pvm5gj') format('woff'),
-		url('../fonts/icomoon/icomoon.ttf?pvm5gj') format('truetype'),
-		url('../fonts/icomoon/icomoon.svg?pvm5gj#icomoon') format('svg');
-	font-weight: normal;
-	font-style: normal;
-} /* Icons created with icomoon.io/app */
 
 .tabs {
 	position: relative;
@@ -69,94 +60,90 @@ input {
 	margin: 1em 0 2em;
 }
 
-/* Nav */
-.tabs nav {
-	text-align: center;
-}
+	/* Nav */
 
-.tabs nav ul {
-	padding: 0;
-	margin: 0;
-	list-style: none;
-	display: inline-block;
-}
 
-.tabs nav ul li {
-	border-bottom: none;
-	margin: 0 0.25em;
-	display: block;
-	float: left;
-	position: relative;
-}
+	.tabs nav {
+		text-align: center;
+	}
 
-.tabs nav a {
-	color: #becbd2;
-	display: block;
-	font-size: 1.45em;
-	line-height: 2.5;
-	padding: 0 1.25em;
-	white-space: nowrap;
-}
+		.tabs nav ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			display: inline-block;
+		}
 
+		.tabs nav a {
+			color: #5DC3EE;
+			display: block;
+			font-size: 1.45em;
+			line-height: 2.5;
+			padding: 0 1.25em;
+			white-space: nowrap;
+		}
 
 #HomeContent {
-  display: block;
+	display: block;
 }
+
 #DataContent {
 	display: none;
 	margin-top: 120px;
 }
+
 #SettingContent {
 	display: none;
 	color: black;
 }
+
 #ResourcesContent {
-  display: block;
-  color: black;
-}
-#data-avg{
-  display: none;
-  margin-top: 170px;
+	display: block;
+	color: black;
 }
 
+#data-avg {
+	display: none;
+	margin-top: 170px;
+}
 
 .btn-group button {
-  height: 20px;
-  color: white;
-  cursor: pointer; /* Pointer/hand icon */
-  float: left; /* Float the buttons side by side */
+	height: 20px;
+	color: white;
+	cursor: pointer; /* Pointer/hand icon */
+	float: left; /* Float the buttons side by side */
 }
 
-.btn-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
-}
+	.btn-group button:not(:last-child) {
+		border-right: none; /* Prevent double borders */
+	}
 
 /* Clear floats (clearfix hack) */
 .btn-group:after {
-  content: "";
-  clear: both;
-  display: table;
+	content: "";
+	clear: both;
+	display: table;
 }
 
 .column {
-  width: 50%;
+	width: 50%;
 }
 
 .row {
-  width: 100%;
+	width: 100%;
 }
 
-/* Clear floats after image containers */
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+	/* Clear floats after image containers */
+	.row::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
 
-.tr{
-  width: 100%;
+.tr {
+	width: 100%;
 }
 
 .tc {
-  width: 33.33%;
+	width: 33.33%;
 }

@@ -3,108 +3,102 @@
 <link rel="stylesheet" type="text/css" href="styling.css">
 
 <head>
-  <title>Chrome-Extension</title>
-  <script src="jquery-3.5.1.min.js"></script>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="storage_utils.js"></script>
-  <script src="alarm_utils.js"></script>
-  <script type="module" src="data-viz.js"></script>
+    <title>Chrome-Extension</title>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="storage_utils.js"></script>
+    <script src="alarm_utils.js"></script>
+    <script type="module" src="data-viz.js"></script>
 </head>
 
 <body>
-  <div class="footer">
-    <div id="tabs" class="tabs">
-      <nav>
-        <ul class="nav nav-tabs">
-          <button id="tab" class="tablinks"><a data-toggle="tab"><img class="iconImage"
-                src="home-icon.png"></a></button>
-          <button id="tab2" class="tablinks"><a data-toggle="tab"><img class="iconImage"
-                src="data-icon.png"></a></button>
-          <button id="tab3" class="tablinks"><a data-toggle="tab"><img class="iconImage" src="resources-icon.png"></a>
-            </li>
-            <button id="tab4" class="tablinks"><a data-toggle="tab"><img class="iconImage" src="another-icon.png"></a>
-              </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-
-  <!--- HOME CONTENT -->
-  <div id="HomeContent" class="tabcontent">
-      <br><br><br><br><br>
-      <h2 id="slogan">Enlightment for your state of mind</h2>
-      <br>
-      <br>
-      <br>
-      <h2>How was your day today?</h2>
-      <div id="mood-check">
-        <div class="row">
-            <div class="column" style="float: left;">
-                <img src="sadface.png" style="width:20%; float:left;">
-            </div>
-            <div class="column" style="float: right;">
-                <img src="happyface.png" style="width:20%; float:right;">
-            </div>
+    <div class="footer">
+        <div id="tabs" class="tabs">
+            <nav>
+                <ul class="nav nav-tabs">
+                    <button style="background-color:#5DC3EE; border:none;" id="tab" class="tablinks"><a data-toggle="tab" "><img class="iconImage" src="home-icon.png"></a></button>
+                    <button style="background-color:#5DC3EE; border:none;" id="tab2" class="tablinks"><a data-toggle="tab"><img class="iconImage" src="data-icon.png"></a></button>
+                    <button style="background-color:#5DC3EE; border:none;" id="tab3" class="tablinks"><a data-toggle="tab"><img class="iconImage" src="resources-icon.png"></a></button>
+                    <button style="background-color:#5DC3EE; border:none;" id="tab4" class="tablinks"><a data-toggle="tab"><img class="iconImage" src="another-icon.png"></a></button>
+                </ul>
+            </nav>
         </div>
-        <br>
-        <div id="div-buttons" class="btn-group" style="width: 100%;">
-          <button style="background-color: #0088cc; width: 20%;" id="-2"> -2 </button>
-          <button style="background-color: #33ccff; width: 20%;" id="-1"> -1 </button>
-          <button style="background-color: #80dfff; width: 20%;" id="0"> 0 </button>
-          <button style="background-color: #33ccff; width: 20%;" id="1"> 1 </button>
-          <button style="background-color: #0088cc; width: 20%;" id="2"> 2 </button>
+    </div>
+
+    <!--- HOME CONTENT -->
+    <div id="HomeContent" class="tabcontent">
+        <br><br><br><br><br>
+        <h2 id="slogan">Enlightment for your state of mind</h2>
+        <br><br><br>
+        <div id="mood-check">
+            <h2>How was your day today?</h2>
+            <div class="row">
+                <div class="column" style="float: left;">
+                    <img src="sadface.png" style="width:20%; float:left;">
+                </div>
+                <div class="column" style="float: right;">
+                    <img src="happyface.png" style="width:20%; float:right;">
+                </div>
+            </div>
+            <br>
+            <div id="div-buttons" class="btn-group" style="width: 100%;">
+                <button style="background-color: #0088cc; width: 20%;" id="-2"> -2 </button>
+                <button style="background-color: #33ccff; width: 20%;" id="-1"> -1 </button>
+                <button style="background-color: #80dfff; width: 20%;" id="0"> 0 </button>
+                <button style="background-color: #33ccff; width: 20%;" id="1"> 1 </button>
+                <button style="background-color: #0088cc; width: 20%;" id="2"> 2 </button>
+            </div>
+
+            <table style="width: 100%;">
+                <tr>
+                    <td style="text-align: left; color: #0088cc; width: 33.3%;"><b>BAD</b></td>
+                    <td style="text-align: center; color: #707679; width: 33.3%;"><b>NEUTRAL</b></td>
+                    <td style="text-align: right; color: #0088cc; width: 33.3%;"><b>GOOD</b></td>
+                </tr>
+            </table>
         </div>
 
-        <table style="width: 100%;">
-            <tr>
-                <td style="text-align: left; color: #0088cc; width: 33.3%;"><b>BAD</b></td>
-                <td style="text-align: center; color: #707679; width: 33.3%;"><b>NEUTRAL</b></td>
-                <td style="text-align: right; color: #0088cc; width: 33.3%;"><b>GOOD</b></td>
-            </tr>
-        </table>
-      </div>
-
-      <div id="post-mood-check"><h1>Thanks for submitting. See you tomorrow!</h1></div>
-
-      <h2> Quote of the day:</h2>
-      <h2 id="quote">"It's not what happens to you but how you react to it that matters." - Epictetus </h2>
-  </div>
-
-  <!--- DATA CONTENT -->
-  <div id="DataContent" class="tabcontent">
-    <div id="chart">
-      <h1 style="color: #0088cc; text-align:center;">Data Analytics</h1>
+        <div id="post-mood-check"><br><h1>Thanks for submitting. See you tomorrow!</h1></div>
+        <br><br><br>
+        <h2> Quote of the day:</h2>
+        <h2 id="quote">"It's not what happens to you but how you react to it that matters." - Epictetus </h2>
     </div>
-    <h1 id="data-avg" style="color: #0088cc; text-align:center;">Weekly Avg</h1>
-  </div>
 
-  <!--- SETTINGS CONTENT -->
-  <div id="SettingContent" class="tabcontent">
-      <br><br><br><br>
-      <h1>Notification Settings</h1>
-      <!-- Rounded switch -->
-      <label for="dayEnd">End of the Work Day Reminder:</label>
-      <input type="checkbox" id="dayEnd">
-      <p></p>
-      <label for="StopWork">Pick a time to get reminded to stop working:</label>
-      <input type="time" id="StopWork" name="StopWork">
-      <br><br>
-      <label for="reminder">Daily Reminder:</label>
-      <input type="checkbox" id="reminder">
-      <p></p>
-      <label for="reminderTime">Pick a time to get reminder to check your state of mind:</label>
-      <input type="time" id="reminderTime" name="reminderTime">
-      <br><br><br>
-      <button id="apply-settings" type="button">Save Settings</button>
-  </div>
+    <!--- DATA CONTENT -->
+    <div id="DataContent" class="tabcontent">
+        <div id="chart">
+            <h1 style="color: #0088cc; text-align:center;">Data Insights</h1>
+        </div>
+        <h1 id="data-avg" style="color: #0088cc; text-align:center;">Weekly Avg</h1>
+    </div>
 
-  <!--- RESOURCES CONTENT -->
-  <div id="ResourcesContent" class="tabcontent">
-    ResourcesContentHere
-  </div>
+    <!--- SETTINGS CONTENT -->
+    <div id="SettingContent" class="tabcontent">
+        <br><br><br><br>
+        <h1>Notification Settings</h1>
+        <!-- Rounded switch -->
+        <label for="dayEnd">End of the Work Day Reminder:</label>
+        <input type="checkbox" id="dayEnd">
+        <p></p>
+        <label for="StopWork">Pick a time to get reminded to stop working:</label>
+        <input type="time" id="StopWork" name="StopWork">
+        <br><br>
+        <label for="reminder">Daily Reminder:</label>
+        <input type="checkbox" id="reminder">
+        <p></p>
+        <label for="reminderTime">Pick a time to get reminder to check your state of mind:</label>
+        <input type="time" id="reminderTime" name="reminderTime">
+        <br><br><br>
+        <button id="apply-settings" type="button">Save Settings</button>
+    </div>
 
-  <script src="tabs.js"></script>
-  <script src="popup.js"></script>
+    <!--- RESOURCES CONTENT -->
+    <div id="ResourcesContent" class="tabcontent">
+        ResourcesContentHere
+    </div>
+
+    <script src="tabs.js"></script>
+    <script src="popup.js"></script>
 
 </body>
 
