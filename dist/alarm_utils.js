@@ -17,42 +17,46 @@ const workday_notification_options = {
 
 /**
  * If the notification has already gone off that day, sets it for the default time the next day.
- * If the notification has not yet gone off that day, sets it for max(default time, current time + reminderPeriod).
+ * If the notification has not yet gone off that day and the user already clicked, sets it for the next day.
+ * If the notification has not yet gone off and the user has not clicked, sets it for the same day.
  */
 function updateReminderAlarm() {
     chrome.alarms.clear("notification");
-    getMoodData(function(data) {
-        getReminderPeriod(function(notification_period) {
-            getNotificationTime(function(notification_hour, notification_minute) {
-                // Check if user already submitted an input today.
-                var currentTime = new Date();
-                var nextNotificationTime = new Date();
-                if (data != undefined && data.length > 0) {
-                    // User has submitted data before.
-                    var lastInputTimestamp = new Date(data[data.length - 1].timestamp);
-                    if (lastInputTimestamp.getDate() == currentTime.getDate()) {
-                        // User already submitted input, set notification for tomorrow.
+    getRemindersEnabled(function (enabled){
+        if (enabled) {
+            getMoodData(function(data) {
+                getReminderTime(function(notification_hour, notification_minute) {
+                    var currentTime = new Date();
+        
+                    // Set next notification time to today at set time
+                    var nextNotificationTime = new Date();
+                    nextNotificationTime.setDate(currentTime.getDate());
+                    nextNotificationTime.setHours(notification_hour);
+                    nextNotificationTime.setMinutes(notification_minute);
+                    nextNotificationTime.setSeconds(0);
+                    nextNotificationTime.setMilliseconds(0);
+        
+                    if (nextNotificationTime < currentTime) {
+                        // If we missed it, remind tomorrow
                         nextNotificationTime.setDate(nextNotificationTime.getDate() + 1);
-                        nextNotificationTime.setHours(notification_hour);
-                        nextNotificationTime.setMinutes(notification_minute);
-                        nextNotificationTime.setSeconds(0);
-                        nextNotificationTime.setMilliseconds(0);
                     }
                     else {
-                        // User has not submitted input today, remind them.
-                        nextNotificationTime.setHours(nextNotificationTime.getHours() + notification_period);
+                        // Check if user already submitted data today.
+                        if (data != undefined && data.length > 0) {
+                            var lastInputTimestamp = new Date(data[data.length - 1].timestamp);
+                            if (lastInputTimestamp.getDate() == currentTime.getDate()) {
+                                // User already submitted input, set notification for tomorrow.
+                                nextNotificationTime.setDate(nextNotificationTime.getDate() + 1);
+                            }
+                        }
                     }
-                }
-                else {
-                    // User has never submitted data, remind them.
-                    nextNotificationTime.setHours(nextNotificationTime.getHours() + notification_period);
-                }
-
-                chrome.alarms.create("notification", {when: nextNotificationTime.getTime()});
-                console.log("Setting next notification for " + nextNotificationTime);
+        
+                    chrome.alarms.create("notification", {when: nextNotificationTime.getTime()});
+                    console.log("Setting next notification for " + nextNotificationTime);
+                });
             });
-        });
-    });
+        }
+    })
 }
 
 /**

@@ -13,54 +13,83 @@
 </head>
 
 <body>
-  <h2>Test output: <span id="num">0</span></h2>
-  <!--input onclick="location.href='main_view.html';" type="button" id="test_button" value="Check-in"-->
   <div class="footer">
     <div id="tabs" class="tabs">
-            <nav>
-              <ul class="nav nav-tabs">
-                <button id = "tab" class="tablinks" ><a data-toggle="tab"><img class="iconImage" src="home-icon.png"></a></button>
-                <button id = "tab2" class="tablinks"><a data-toggle="tab"><img class="iconImage" src="data-icon.png"></a></button>
-                <button id = "tab3" class="tablinks"><a data-toggle="tab" ><img class="iconImage" src="resources-icon.png"></a></li>
-                <button id = "tab4" class="tablinks"><a data-toggle="tab"><img class="iconImage" src="another-icon.png"></a></li>
-              </ul>
-            </nav>
-          </div>
+      <nav>
+        <ul class="nav nav-tabs">
+          <button id="tab" class="tablinks"><a data-toggle="tab"><img class="iconImage"
+                src="home-icon.png"></a></button>
+          <button id="tab2" class="tablinks"><a data-toggle="tab"><img class="iconImage"
+                src="data-icon.png"></a></button>
+          <button id="tab3" class="tablinks"><a data-toggle="tab"><img class="iconImage" src="resources-icon.png"></a>
+            </li>
+            <button id="tab4" class="tablinks"><a data-toggle="tab"><img class="iconImage" src="another-icon.png"></a>
+              </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 
+  <!--- HOME CONTENT -->
   <div id="HomeContent" class="tabcontent">
-  <!-- <br>
-  <br>
-  <br>
-  <br> -->
-  <br>
-  <h1>Test output: <span id="num">0</span></h1>
-  <div>
 
-    <input type="button" id="test_button" value="1">
-    <input type="button" value="2">
-    <input type="button" value="3">
-    <input type="button" value="4">
-    <input type="button" value="5">
-    <input type="button" value="6">
-    <input type="button" value="7">
-    <input type="button" value="8">
-    <input type="button" value="9">
-    <input type="button" value="11">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="row">
+      <div class="column" style="float: left;">
+        <img src="happyface.png" style="width:20%">
+      </div>
+      <div class="column" style="float: right;">
+        <img src="sadface.png" style="width:20%; float:right;">
+      </div>
+    </div>
+
+    <div class="btn-group" style="width: 100%;">
+      <button style="background-color: #0088cc; width: 20%;" id="-2"> -2 </button>
+      <button style="background-color: #33ccff; width: 20%;" id="-1"> -1 </button>
+      <button style="background-color: #80dfff; width: 20%;" id= "0">  0 </button>
+      <button style="background-color: #33ccff; width: 20%;" id= "1">  1 </button>
+      <button style="background-color: #0088cc; width: 20%;" id= "2">  2 </button>
+    </div>
+
+    <tr>
+      <tc style="width: 33.3%; float: left;">
+        <span style="color: #0088cc; text-align: left;"><b>BAD</b></span>
+      </tc>
+      <tc style="width: 33.3%; float: left;">
+        <span style="color: #0088cc; text-align: center;"><b>NEUTRAL</b></span>
+      </tc>
+      <tc style="width: 33.3%;  float: right;">
+        <span style="color: #0088cc; text-align: right;"><b>GOOD</b></span>
+      </tc>
+    </tr>
+
+    <h1 id = "value"></h1>
+
+    <script src="button.js"></script>
+
   </div>
 
+  <!--- DATA CONTENT -->
+  <div id="DataContent" class="tabcontent">
+    <button>Show Data</button>
+    <div id="chart"></div>
   </div>
 
-<div id="DataContent" class="tabcontent">
-  <button id="chart-button">Show Data</button>
-  <div id="chart"></div>
-</div>
-
-<div id="SettingContent" class="tabcontent">
-  SettingsContentHere
-</div>
+  <!--- SETTINGS CONTENT -->
+  <div id="SettingContent" class="tabcontent">
+    SettingsContentHere
+  </div>
 
   <script src="tabs.js"></script>
+
 </body>
 
 </html>
