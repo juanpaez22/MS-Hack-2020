@@ -60,3 +60,36 @@ function hasUserClickedYesterday(callback) {
         }
     });
 }
+
+function showAllButtons() {
+    var x = document.getElementById("div-buttons");
+    x.style.display = "block";
+}
+
+function hideAllButtons() {
+    var x = document.getElementById("div-buttons");
+    x.style.display = "none";
+}
+
+$(function(){
+    $("#-2").click(function(){
+        appendMoodData(-2);
+        hideAllButtons();
+    });
+    $("#-1").click(function(){
+        appendMoodData(-1);
+        hideAllButtons();
+    });
+    $("#0").click(function(){
+        appendMoodData(0);
+        hideAllButtons();
+    });
+    $("#1").click(function(){
+        appendMoodData(1);
+        hideAllButtons();
+    });
+    $("#2").click(function(){
+        appendMoodData(2);
+        hideAllButtons();
+    });
+});
