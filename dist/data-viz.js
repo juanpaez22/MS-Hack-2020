@@ -114,7 +114,7 @@ function convertEntries(entries){
         entries.forEach((entry) => {
 
             let x = scaleRange(min,max,a,b,Date.parse(entry.timestamp)) + x_bias
-            let y = scaleRange(0,5,0,200,(5-entry.val))
+            let y = scaleRange(-2,3,0,200,(1-(entry.val)))
             converted_entries.push({x: x, y:y})
         });
     }
@@ -161,15 +161,30 @@ function analyzeData(data){
     document.getElementById("chart").style.display = "block"
 
     let past_week_avg = getAvg(filtered_list)
-    document.getElementById("data-avg").innerHTML = document.getElementById("data-avg").innerHTML + ": " + past_week_avg;
+    document.getElementById("data-avg").innerHTML = (document.getElementById("data-avg").innerHTML.slice(0,10)) + ": " + past_week_avg;
     document.getElementById("data-avg").style.display = "block"
 
     console.log("converted", converted_entries);
 }
 
+function removeChart(){
+    let chart = document.getElementById("chart")
+    let svg = chart.getElementsByTagName("svg")[0]
+    chart.removeChild(svg);        
+    
 
+}
 $(document).ready(()=>{
     $("#tab2").on("click",()=>{
         getMoodData(analyzeData)
+    })
+    $("#tab").on("click",()=>{
+        removeChart()
+    })
+    $("#tab3").on("click",()=>{
+        removeChart()
+    })
+    $("#tab4").on("click",()=>{
+        removeChart()
     })
 })

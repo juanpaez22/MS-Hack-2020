@@ -28,7 +28,7 @@ h1 {
 	display: none;
 	margin-top: 15px;
 	width: 400px;
-	height: 200px;
+	height: 100px;
 }
 
 input {
@@ -89,7 +89,6 @@ input {
 
 #DataContent {
 	display: none;
-	margin-top: 120px;
 }
 
 #SettingContent {
@@ -104,7 +103,7 @@ input {
 
 #data-avg {
 	display: none;
-	margin-top: 170px;
+	margin-top: 190px;
 }
 
 .btn-group button {
