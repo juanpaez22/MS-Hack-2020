@@ -40,7 +40,7 @@ function bootstrapFakeData() {
   for (i = 6; i >= 1; i --) {
     var cur_date = new Date();
     var date = new Date(cur_date.getFullYear(), cur_date.getMonth(),cur_date.getDate() - i);
-    data.push({val: getRandomInt(4), timestamp: date.toString()});
+    data.push({val: (getRandomInt(4) - 2), timestamp: date.toString()}); // get random numbers between -2 and 2
   }
 
   chrome.storage.sync.set({data: data}, function () {
