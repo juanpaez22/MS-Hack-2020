@@ -101,3 +101,36 @@ input {
   display: block;
   color: black;
 }
+
+.btn-group button {
+  height: 20px;
+  color: white;
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.column {
+  width: 50%;
+}
+
+.row {
+  width: 100%;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
