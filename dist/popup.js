@@ -5,7 +5,9 @@
  * Runs when popup DOM is loaded.
  */
 const initScript = () => {
-    console.log("Initialized popup script")
+    console.log("Initialized popup script");
+    initTabs();
+    openHomeContent();
     // TODO: Any initializations-- load initial quote, etc.
 };
 

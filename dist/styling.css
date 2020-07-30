@@ -107,6 +107,10 @@ input {
 	display: none;
 	color: black;
 }
+#ResourcesContent {
+  display: block;
+  color: black;
+}
 #data-avg{
   display: none;
   margin-top: 170px;
