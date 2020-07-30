@@ -3,7 +3,7 @@ function createGraph(data){
     // set the dimensions and margins of the graph
 
     // create svg element:
-    var svg = d3.select("#chart").append("svg").attr("width", 400).attr("height", 300)
+    var svg = d3.select("#chart").append("svg").attr("width", 400).attr("height", 300).style("background-color","#5DC3EE")
 
     // Create the scale
     var x = d3.scalePoint()
@@ -12,7 +12,7 @@ function createGraph(data){
 
     svg
     .append("g")
-    .attr("transform", "translate(0,205)")      // This controls the vertical position of the Axis
+    .attr("transform", "translate(0,210)")      // This controls the vertical position of the Axis
     .call(d3.axisBottom(x));
 
     var y = d3.scalePoint()
@@ -21,7 +21,7 @@ function createGraph(data){
 
     svg
     .append("g")
-    .attr("transform", "translate(350,0)")      // This controls the vertical position of the Axis
+    .attr("transform", "translate(350,20)")
     .call(d3.axisRight(y));
 
     // prepare a helper function
@@ -44,7 +44,7 @@ function createGraph(data){
       .attr("cx", function (d) { return d.x; } )
       .attr("cy", function (d) { return d.y; } )
       .attr("r", 3)
-      .style("fill", "black")
+      .style("fill", "white")
       .append("title")
         .text("innerHTML")
 
@@ -80,18 +80,8 @@ function getXAxis(first,last){
     let first_d = new Date(first.timestamp)
     let last_d = new Date(last.timestamp)
 
-    if(first_d.getDate() == last_d.getDate()){
-        //set axis to local time
-        axis.push(first_d.toLocaleTimeString('en-US'))
-        axis.push(last_d.toLocaleTimeString('en-US'))
-    }
-
-    //set axis to month and day
-    else{
-        axis.push(month_map[first_d.getMonth()] + " " + first_d.getDate())
-        axis.push(month_map[last_d.getMonth()] + " " + last_d.getDate())
-    }
-    
+    axis.push(month_map[first_d.getMonth()] + " " + first_d.getDate())
+    axis.push(month_map[last_d.getMonth()] + " " + last_d.getDate())
     return axis
 }
 function convertEntries(entries){
@@ -103,12 +93,23 @@ function convertEntries(entries){
     let a = 25;
     let b = 340;
 
-    entries.forEach((entry) => {
+    let x_bias = 25;
 
-        let x = scaleRange(min,max,a,b,Date.parse(entry.timestamp)) + 25
-        let y = scaleRange(0,10,0,200,(10-entry.val))
-        converted_entries.push({x: x, y:y})
-    });
+    if(entries.length == 1){
+        let x = ((b-a)/2) + x_bias
+        let y = scaleRange(0,10,0,200,(10-entries[0].val))
+        converted_entries.push({x:x, y:y})
+    }
+
+    else{
+        entries.forEach((entry) => {
+
+            let x = scaleRange(min,max,a,b,Date.parse(entry.timestamp)) + x_bias
+            let y = scaleRange(0,10,0,200,(10-entry.val))
+            converted_entries.push({x: x, y:y})
+        });
+    }
+    
     
     let axis = getXAxis(entries[0],entries[entries.length - 1])
     return [converted_entries,axis]
@@ -137,12 +138,12 @@ function getRandomInt(max) {
 
 function analyzeData(data){
     console.log(data)
-    let filtered_list = filterLast7Days(data.slice(10,data.length))//limiting to last 10 bc i hace bad data
+    let filtered_list = filterLast7Days(data)//limiting to last 10 bc i hace bad data
+    console.log("filtered", filtered_list);
     let converted_entries = convertEntries(filtered_list)
     createGraph(converted_entries)
     document.getElementById("chart").style.display = "block"
 
-    console.log("filtered", filtered_list);
     console.log("converted", converted_entries);
 }
 

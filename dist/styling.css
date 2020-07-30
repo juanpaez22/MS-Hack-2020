@@ -95,6 +95,7 @@ input {
   display: block;
 }
 #DataContent {
+  margin-top: 70px;
   display: block;
 }
 #SettingContent {

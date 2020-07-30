@@ -12,7 +12,7 @@ const initScript = () => {
 // Initialize script on load
 document.addEventListener('DOMContentLoaded', initScript);
 
-JQuery listener
+//JQuery listener
 $(function(){
 
     // Demo query showing how storage works when a button is clicked.
@@ -29,5 +29,5 @@ $(function(){
         });
     });
 
-    TODO: add listener for real buttons
+    //TODO: add listener for real buttons
 });
