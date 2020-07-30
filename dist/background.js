@@ -47,7 +47,7 @@ function bootstrapFakeData() {
     chrome.storage.sync.get('data', function (result) {
         console.log("New data:")
         console.log(result.data)
-        updateReminderAlarm();
+        updateReminderAlarm(); 
     });
   });
 }
