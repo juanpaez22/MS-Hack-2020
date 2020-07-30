@@ -3,26 +3,33 @@ function createGraph(data){
     // set the dimensions and margins of the graph
 
     // create svg element:
-    var svg = d3.select("#chart").append("svg").attr("width", 400).attr("height", 300).style("background-color","#5DC3EE")
+    var svg = d3.select("#chart").append("svg").attr("width", 400).attr("height", 300)
 
     // Create the scale
     var x = d3.scalePoint()
     .domain(data[1])         // This is what is written on the Axis: from 0 to 100
-    .range([30, 340]);       // This is where the axis is placed: from 100 px to 800px
+    .range([30, 320]);       // This is where the axis is placed: from 100 px to 800px
 
     svg
     .append("g")
-    .attr("transform", "translate(0,210)")      // This controls the vertical position of the Axis
-    .call(d3.axisBottom(x));
+    .attr("transform", "translate(0,120)")      // This controls the vertical position of the Axis
+    .call(d3.axisBottom(x))
+        .selectAll("path")
+        .attr("stroke","#0088cc")
+            
 
     var y = d3.scalePoint()
-    .domain(["Bad", "Good","Amazing"])         // This is what is written on the Axis: from 0 to 100
+    .domain(["Bad", "Average","Good"])         // This is what is written on the Axis: from 0 to 100
     .range([190, 10]);       // This is where the axis is placed: from 100 px to 800px
 
     svg
     .append("g")
     .attr("transform", "translate(350,20)")
-    .call(d3.axisRight(y));
+    .call(d3.axisRight(y))
+        .selectAll("path")
+        .attr("stroke","#0088cc")
+        .selectAll("line")
+        .attr("stroke","#0088cc")
 
     // prepare a helper function
     var lineFunc = d3.line()
@@ -44,11 +51,13 @@ function createGraph(data){
       .attr("cx", function (d) { return d.x; } )
       .attr("cy", function (d) { return d.y; } )
       .attr("r", 3)
-      .style("fill", "white")
+      .style("fill", "#0088cc")
       .append("title")
         .text("innerHTML")
 
-    d3.selectAll("svg text")
+    d3.selectAll("svg text").style("fill", "#0088cc")
+
+    d3.selectAll("svg line").attr("stroke","#0088cc")
     document.getElementById("chart").style.display = "block"
     
 }
@@ -105,7 +114,7 @@ function convertEntries(entries){
         entries.forEach((entry) => {
 
             let x = scaleRange(min,max,a,b,Date.parse(entry.timestamp)) + x_bias
-            let y = scaleRange(0,10,0,200,(10-entry.val))
+            let y = scaleRange(0,5,0,200,(5-entry.val))
             converted_entries.push({x: x, y:y})
         });
     }
@@ -135,7 +144,14 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
+function getAvg(data){
+    let avg = 0;
+    data.forEach((entry) => {
+        avg += (entry.val - 2)
+    })
 
+    return Math.round(avg/data.length)
+}
 function analyzeData(data){
     console.log(data)
     let filtered_list = filterLast7Days(data)//limiting to last 10 bc i hace bad data
@@ -144,11 +160,16 @@ function analyzeData(data){
     createGraph(converted_entries)
     document.getElementById("chart").style.display = "block"
 
+    let past_week_avg = getAvg(filtered_list)
+    document.getElementById("data-avg").innerHTML = document.getElementById("data-avg").innerHTML + ": " + past_week_avg;
+    document.getElementById("data-avg").style.display = "block"
+
     console.log("converted", converted_entries);
 }
 
+
 $(document).ready(()=>{
-    $("#chart-button").on("click",()=>{
+    $("#tab2").on("click",()=>{
         getMoodData(analyzeData)
     })
 })

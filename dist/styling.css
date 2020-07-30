@@ -95,8 +95,13 @@ input {
   display: block;
 }
 #DataContent {
-  margin-top: 70px;
+  margin-top: 120px;
   display: block;
+}
+
+#data-avg{
+  display: none;
+  margin-top: 170px;
 }
 #SettingContent {
   display: block;

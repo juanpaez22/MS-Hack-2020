@@ -31,12 +31,16 @@ chrome.notifications.onClicked.addListener(function () {
   chrome.windows.create({url: "popup.html", width: 450, height: 600, type: "popup"})
 });
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 function bootstrapFakeData() {
   var data = [];
   for (i = 6; i >= 1; i --) {
     var cur_date = new Date();
     var date = new Date(cur_date.getFullYear(), cur_date.getMonth(),cur_date.getDate() - i);
-    data.push({val: 7 - i, timestamp: date.toString()});
+    data.push({val: getRandomInt(4), timestamp: date.toString()});
   }
 
   chrome.storage.sync.set({data: data}, function () {
