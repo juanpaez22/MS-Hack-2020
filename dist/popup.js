@@ -62,12 +62,12 @@ function hasUserClickedYesterday(callback) {
 }
 
 function showAllButtons() {
-    var x = document.getElementById("div-buttons");
+    var x = document.getElementById("temp");
     x.style.display = "block";
 }
 
 function hideAllButtons() {
-    var x = document.getElementById("div-buttons");
+    var x = document.getElementById("temp");
     x.style.display = "none";
 }
 
