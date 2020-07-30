@@ -12,22 +12,49 @@ const initScript = () => {
 // Initialize script on load
 document.addEventListener('DOMContentLoaded', initScript);
 
-JQuery listener
-$(function(){
+// TODO: call this function to see if we should hide the buttons (and do so in callback).
+function hasUserClickedToday(callback) {
+    getMoodData(function (data) {
+        if (data != undefined && data.length > 0) {
+            var last_timestamp = new Date(data[data.length - 1].timestamp);
+            var current_timestamp = new Date();
 
-    // Demo query showing how storage works when a button is clicked.
-    // Gets previous result, and sets new result in the callback.
-    $('#test_button').click(function(){
-
-        getMoodData(function (data) {
-            var new_num = 0;
-            if (data != undefined) {
-                new_num = data[data.length - 1].val + 1;
+            // TODO (bug): fails if day of the month is the same.
+            if (last_timestamp.getDate() == current_timestamp.getDate()) {
+                callback(true);
             }
-            console.log("Previous final data element: ", new_num);
-            appendMoodData(new_num);
-        });
+            else {
+                callback(false);
+            }
+        }
+        else {
+            callback(false);
+        }
     });
+}
 
-    TODO: add listener for real buttons
-});
+// TODO: call this function on user mood input to see if streak should be incremented.
+function hasUserClickedYesterday(callback) {
+    getMoodData(function (data) {
+        if (data != undefined && data.length > 0) {
+            var last_timestamp = new Date(data[data.length - 1].timestamp);
+            var yesterday_timestamp = new Date();
+            yesterday_timestamp.setDate(yesterday_timestamp.getDate() - 1);
+
+            // TODO (bug): fails if day of the month is the same.
+            if ((last_timestamp.getDate() == (new Date()).getDate()) && data.length > 1) {
+                last_timestamp = new Date(data[data.length - 2].timestamp);
+            }
+
+            if (last_timestamp.getDate() == yesterday_timestamp.getDate()) {
+                callback(true);
+            }
+            else {
+                callback(false);
+            }
+        }
+        else {
+            callback(false);
+        }
+    });
+}

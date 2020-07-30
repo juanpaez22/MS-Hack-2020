@@ -50,10 +50,30 @@ function getMoodData(callback) {
 // ***************************************************************
 
 /**
+ * Enables or disables reminders.
+ * @param {} should_notify true or false.
+ */
+function setRemindersEnabled(should_notify) {
+    chrome.storage.sync.set({reminders_enabled: should_notify}, function() {
+        console.log("Set reminders enabled to " + should_notify);
+    });
+}
+
+/**
+ * Gets whether reminders are enabled.
+ * @param {} callback function that takes bool as parameter.
+ */
+function getRemindersEnabled(callback) {
+    chrome.storage.sync.get("reminders_enabled", function(result) {
+        callback(result.reminders_enabled);
+    });
+}
+
+/**
  * Sets the default time at which to notify the user.
  * @param {} hour a number from 0 to 23 representing the time to notify the user.
  */
-function setNotificationTime(hour, minute) {
+function setReminderTime(hour, minute) {
     hour = hour % 24;
     minute = minute % 60;
     chrome.storage.sync.set({notification_hour: hour}, function() {
@@ -68,34 +88,11 @@ function setNotificationTime(hour, minute) {
  * Gets the default time at which to notify the user, and executes a callback with it.
  * @param {} callback the callback to execute, should take hour and minute as params.
  */
-function getNotificationTime(callback) {
+function getReminderTime(callback) {
     chrome.storage.sync.get("notification_hour", function (result1) {
         chrome.storage.sync.get("notification_minute", function(result2) {
             callback(result1.notification_hour, result2.notification_minute);
         });
-    });
-}
-
-/**
- * Sets the period at which to remind the user after the daily reminder.
- * @param {} numHours how often to remind the user to fill out the form.
- */
-function setReminderPeriod(numHours) {
-    if (numHours < 1) {
-        numHours = 1;
-    }
-    chrome.storage.sync.set({reminder_period: numHours}, function() {
-        console.log("Set reminder period for " + numHours);
-    });
-}
-
-/**
- * Gets the period in hours at which to remind a user, and executes a callback with it.
- * @param {} callback the callback to execute.
- */
-function getReminderPeriod(callback) {
-    chrome.storage.sync.get("reminder_period", function (result) {
-        callback(result.reminder_period);
     });
 }
 
@@ -130,6 +127,12 @@ function getEngagementStreak(callback) {
 // ***************************************************************
 //                     Workday Settings
 // ***************************************************************
+
+/**
+ * Sets workday end time.
+ * @param {} end_hour hour.
+ * @param {} end_minute minute.
+ */
 function setWorkdayEndTime(end_hour, end_minute) {
     end_hour = end_hour % 24;
     end_minute = end_minute % 60;
@@ -141,6 +144,10 @@ function setWorkdayEndTime(end_hour, end_minute) {
     });
 }
 
+/**
+ * Gets workday end time and execute callback.
+ * @param {} callback function that takes hour and minute.
+ */
 function getWorkdayEndTime(callback) {
     chrome.storage.sync.get("workday_end_hour", function (result1) {
         chrome.storage.sync.get("workday_end_minute", function(result2) {
@@ -149,12 +156,20 @@ function getWorkdayEndTime(callback) {
     });
 }
 
+/**
+ * Enables or disables workday notifications.
+ * @param {} should_notify true or false.
+ */
 function setWorkdayEnabled(should_notify) {
     chrome.storage.sync.set({workday_enabled: should_notify}, function() {
         console.log("Set workday enabled to " + should_notify);
     });
 }
 
+/**
+ * Gets whether workday notifications are enabled.
+ * @param {} callback function that takes bool as parameter.
+ */
 function getWorkdayEnabled(callback) {
     chrome.storage.sync.get("workday_enabled", function(result) {
         callback(result.workday_enabled);

@@ -5,13 +5,13 @@
 chrome.runtime.onInstalled.addListener(function () {
   // Notify user initially, and set default values.
   console.log("Running on install script.");
-  // bootstrapFakeData();  // TODO: REMOVE THIS LINE BEFORE SUBMITTING
+  bootstrapFakeData();  // TODO: REMOVE THIS LINE BEFORE SUBMITTING
 
-  setReminderPeriod(1); // set reminder period to 1 hour.
-  setNotificationTime(10, 30);  // Set default reminder time to 10:30 AM.
+  setRemindersEnabled(true);
+  setReminderTime(10, 30);  // Set default reminder time to 10:30 AM.
   setEngagementStreak(0); // Clear engagement streak.
-  setWorkdayEnabled(false);  // Disable workday reminder.
-  setWorkdayEndTime(5, 0); // Set default end time to 5 PM.
+  setWorkdayEnabled(true);  // Disable workday reminder.
+  setWorkdayEndTime(17, 0); // Set default end time to 5 PM.
 
   chrome.notifications.create(reminder_notification_options); // Send initial notification.
   updateReminderAlarm();
