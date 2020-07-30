@@ -99,8 +99,8 @@ function convertEntries(entries){
     let min = Date.parse(entries[0].timestamp)
     let max = Date.parse(entries[entries.length - 1].timestamp)
 
-    let a = 25;
-    let b = 340;
+    let a = 30;
+    let b = 320;
 
     let x_bias = 25;
 
