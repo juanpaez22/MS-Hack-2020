@@ -106,7 +106,7 @@ function convertEntries(entries){
 
     if(entries.length == 1){
         let x = ((b-a)/2) + x_bias
-        let y = scaleRange(0,10,0,200,(10-entries[0].val))
+        let y = scaleRange(-2,3,0,200,(1-(entries[0].val)))
         converted_entries.push({x:x, y:y})
     }
 
