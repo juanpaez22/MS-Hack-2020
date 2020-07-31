@@ -27,7 +27,7 @@ h1 {
 #chart {
 	display: none;
 	margin-top: 15px;
-	width: 400px;
+	width: 360px;
 	height: 100px;
 }
 
@@ -102,7 +102,7 @@ input {
 }
 
 #data-avg {
-	display: none;
+	display: block;
 	margin-top: 190px;
 }
 

@@ -3,12 +3,12 @@ function createGraph(data){
     // set the dimensions and margins of the graph
 
     // create svg element:
-    var svg = d3.select("#chart").append("svg").attr("width", 400).attr("height", 300)
+    var svg = d3.select("#chart").append("svg").attr("width", 360).attr("height", 300)
 
     // Create the scale
     var x = d3.scalePoint()
     .domain(data[1])         // This is what is written on the Axis: from 0 to 100
-    .range([30, 320]);       // This is where the axis is placed: from 100 px to 800px
+    .range([30, 260]);       // This is where the axis is placed: from 100 px to 800px
 
     svg
     .append("g")
@@ -24,7 +24,7 @@ function createGraph(data){
 
     svg
     .append("g")
-    .attr("transform", "translate(350,20)")
+    .attr("transform", "translate(280,20)")
     .call(d3.axisRight(y))
         .selectAll("path")
         .attr("stroke","#0088cc")
@@ -100,7 +100,7 @@ function convertEntries(entries){
     let max = Date.parse(entries[entries.length - 1].timestamp)
 
     let a = 30;
-    let b = 320;
+    let b = 260;
 
     let x_bias = 25;
 
@@ -147,10 +147,10 @@ function getRandomInt(max) {
 function getAvg(data){
     let avg = 0;
     data.forEach((entry) => {
-        avg += (entry.val - 2)
+        avg += (entry.val)
     })
 
-    return Math.round(avg/data.length)
+    return (avg/data.length).toString().slice(0,4)
 }
 function analyzeData(data){
     console.log(data)
@@ -169,13 +169,18 @@ function analyzeData(data){
 
 function removeChart(){
     let chart = document.getElementById("chart")
-    let svg = chart.getElementsByTagName("svg")[0]
-    chart.removeChild(svg);        
+    let svgs_ = chart.getElementsByTagName("svg")
+    console.log(svgs_)
+    if(svgs_.length != 0){
+        chart.removeChild(svgs_[0]);       
+    }
+        
     
 
 }
 $(document).ready(()=>{
     $("#tab2").on("click",()=>{
+        removeChart()
         getMoodData(analyzeData)
     })
     $("#tab").on("click",()=>{
