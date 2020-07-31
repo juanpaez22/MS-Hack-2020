@@ -27,6 +27,8 @@ const initScript = () => {
             setEngagementStreak(0); // :(
         }
     })
+
+    populateOldSettings();
 };
 
 // Initialize script on load
@@ -76,6 +78,27 @@ function hasUserClickedYesterday(callback) {
         else {
             callback(false);
         }
+    });
+}
+
+function populateOldSettings() {
+    getRemindersEnabled(function(reminder_enabled) {
+        getWorkdayEnabled(function(workday_enabled) {
+            getReminderTime(function (rem_hour, rem_min) {
+                getWorkdayEndTime(function (end_hour, end_minute) {
+                    console.log(reminder_enabled);
+                    console.log(workday_enabled);
+                    console.log(rem_hour);
+                    console.log(rem_min);
+                    console.log(end_hour);
+                    console.log(end_minute);
+                    document.getElementById("reminder").checked = reminder_enabled;
+                    document.getElementById("dayEnd").checked = workday_enabled;
+                    document.getElementById("reminderTime").value = rem_hour + ":" + rem_min;
+                    document.getElementById("StopWork").value = end_hour + ":" + end_minute;
+                });
+            });
+        });
     });
 }
 

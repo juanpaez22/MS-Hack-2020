@@ -9,9 +9,11 @@ chrome.runtime.onInstalled.addListener(function () {
 
   setRemindersEnabled(true);
   setReminderTime(10, 30);  // Set default reminder time to 10:30 AM.
+
+  setWorkdayEnabled(false);  // Disable workday reminder.
+  setWorkdayEndTime(17, 30); // Set default end time to 5 PM.
+
   setEngagementStreak(0); // Clear engagement streak.
-  setWorkdayEnabled(true);  // Disable workday reminder.
-  setWorkdayEndTime(17, 0); // Set default end time to 5 PM.
 
   chrome.notifications.create(reminder_notification_options); // Send initial notification.
   updateReminderAlarm();
